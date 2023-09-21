@@ -3,7 +3,6 @@
     class="bg-white p-6 rounded-lg shadow-lg hover:scale-105 transition-transform"
   >
     <router-link :to="getBlogLink" class="block">
-      <!-- Add the image here -->
       <img
         v-if="blog.image"
         :src="blog.image"
@@ -33,6 +32,4 @@ export default {
 }
 </script>
 
-<style scoped>
-/* Your styles for the BlogItem component */
-</style>
+<style scoped></style>

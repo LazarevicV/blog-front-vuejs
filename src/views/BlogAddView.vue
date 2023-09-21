@@ -65,14 +65,10 @@ export default {
   },
   methods: {
     addBlog() {
-      // Here you can send the blog data to your server or perform the desired action
-      // For this example, we'll just log the blog data
       console.log('New Blog Data:', this.blog)
     },
   },
 }
 </script>
 
-<style scoped>
-/* Your styles for the BlogAdd component */
-</style>
+<style scoped></style>
