@@ -21,3 +21,5 @@ export const fetchSingleBlog = async (id) => {
     throw new Error('Failed to fetch blogs')
   }
 }
+
+export const loginUser = async (user) => {}
