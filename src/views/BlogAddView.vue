@@ -52,20 +52,17 @@
     </form>
 
     <div v-if="successMessage" class="mt-4 rounded overflow-hidden">
-      <div
-        class="bg-green-200 text-green-800 p-4 flex justify-between items-center transition duration-1000"
-      >
-        <div>{{ successMessage }}</div>
-        <button @click="closeNotification" class="text-gray-700">
-          &times;
-        </button>
-      </div>
+      <DisplayMessage
+        :successMessage="successMessage"
+        @close="successMessage = ''"
+      ></DisplayMessage>
     </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import DisplayMessage from '@/components/DisplayMessage.vue'
 
 export default {
   data() {
@@ -86,26 +83,28 @@ export default {
         this.blog.content === '' ||
         this.blog.image === ''
       ) {
+        console.log('Please fill in all the fields')
+        this.loading = false
+        this.successMessage = 'Please fill in all the fields'
         return
       }
-      this.loading = true // Show the loader
+      this.loading = true
+
       try {
-        // Simulate an API call delay of half a second
         await new Promise((resolve) => setTimeout(resolve, 500))
-        this.successMessage = 'Blog added successfully!'
-        // Automatically close the notification after 5 seconds
-        setTimeout(() => {
-          this.successMessage = ''
-        }, 5000)
+        this.successMessage = 'You have successfully added a new blog!'
       } catch (error) {
         console.error('Error adding the blog:', error)
       } finally {
-        this.loading = false // Hide the loader
+        this.loading = false
+        setTimeout(() => {
+          this.successMessage = ''
+        }, 3000)
       }
     },
-    closeNotification() {
-      this.successMessage = ''
-    },
+  },
+  components: {
+    DisplayMessage,
   },
 }
 </script>
