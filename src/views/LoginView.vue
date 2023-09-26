@@ -105,15 +105,18 @@
     </div>
   </section>
 </template>
-
 <script>
-import { mapActions } from 'vuex'
 import axios from 'axios'
-
 export default {
+  data() {
+    return {
+      email: '',
+      password: '',
+      errorMessage: '',
+      successMessage: '',
+    }
+  },
   methods: {
-    ...mapActions(['setSuccessMessage']),
-
     sendData() {
       axios
         .post('http://127.0.0.1:8000/api/login', {
@@ -122,8 +125,10 @@ export default {
         })
         .then((response) => {
           localStorage.setItem('user', JSON.stringify(response.data.user))
-          this.setSuccessMessage('You are logged in!')
-          this.$router.push({ name: 'Home' })
+          this.successMessage = 'You are logged in!'
+          this.$router.push({ name: 'Home' }).then(() => {
+            window.location.reload()
+          })
         })
         .catch((error) => {
           this.errorMessage = 'Wrong credentials!'
@@ -132,5 +137,4 @@ export default {
   },
 }
 </script>
-
 <style lang=""></style>
